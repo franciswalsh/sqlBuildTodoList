@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Mustache Activity</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Todo</h1>
+    <div id="todoInput">
+      <form action="/" method="post">
+         <p>Enter an item to add to your todo list</p>
+         <input type="text" name="todoListItem" placeholder="something todo">
+         <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="container">
+      <ul>
+        {{#listItems}}
+        {{^completed}}
+        <form action="/completed/{{id}}" method="post" class="eachListItem" name="marking">
+          <li>
+            <button type="submit" name="button" class="completeButton">Mark as complete</button>
+            <label for="button" class="itemValue">{{listItem}}</label>
+          </li>
+        </form>
+        {{/completed}}
+        {{/listItems}}
+      </ul>
+    </div>
+    <div id="completedItemsContainer">
+      <h1 id="completedItemsHeader">Completed Items</h1>
+      <ul id="completedItems">
+        {{#listItems}}
+          {{#completed}}
+          <li>{{listItem}} has been completed</li>
+          {{/completed}}
+        {{/listItems}}
+      </ul>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="data.js"></script>
+  </body>
+</html>
